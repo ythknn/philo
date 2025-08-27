@@ -6,15 +6,15 @@
 /*   By: yihakan <yihakan@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 00:41:28 by yihakan           #+#    #+#             */
-/*   Updated: 2025/08/28 01:28:30 by yihakan          ###   ########.fr       */
+/*   Updated: 2025/08/28 01:38:55 by yihakan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/philo.h"
 
-static void ft_cleanup(t_program_data *p_data)
+static void	ft_cleanup(t_program_data *p_data)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < p_data->t_num_philosophers)
@@ -29,11 +29,11 @@ static void ft_cleanup(t_program_data *p_data)
 	free(p_data->t_philosophers);
 }
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-	t_program_data  p_data;
-	int             i;
-	
+	t_program_data	p_data;
+	int				i;
+
 	if (ft_parse_args(argc, argv, &p_data) != 0)
 		return (1);
 	if (ft_init_data(&p_data) != 0)
