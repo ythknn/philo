@@ -6,7 +6,7 @@
 /*   By: yihakan <yihakan@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 00:42:22 by yihakan           #+#    #+#             */
-/*   Updated: 2025/08/28 00:45:24 by yihakan          ###   ########.fr       */
+/*   Updated: 2025/08/28 01:28:27 by yihakan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,5 +89,3 @@ int ft_init_data(t_program_data *p_data)
     }
     return (0);
 }
-
-

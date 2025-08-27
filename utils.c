@@ -6,7 +6,7 @@
 /*   By: yihakan <yihakan@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 00:43:06 by yihakan           #+#    #+#             */
-/*   Updated: 2025/08/28 00:45:24 by yihakan          ###   ########.fr       */
+/*   Updated: 2025/08/28 01:26:44 by yihakan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,3 @@ void ft_print_status(t_philosopher *p_philo, const char *status, const char *col
     pthread_mutex_unlock(&p_data->t_death_mutex);
     pthread_mutex_unlock(&p_data->t_write_mutex);
 }
-
-

@@ -6,7 +6,7 @@
 /*   By: yihakan <yihakan@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 00:42:33 by yihakan           #+#    #+#             */
-/*   Updated: 2025/08/28 01:08:16 by yihakan          ###   ########.fr       */
+/*   Updated: 2025/08/28 01:30:09 by yihakan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ static int ft_is_philo_dead(t_philosopher *p_philo, t_program_data *p_data)
     pthread_mutex_lock(&p_data->t_meal_check_mutex);
     time_since_last_meal = ft_get_time_ms() - p_philo->t_last_meal_time;
     pthread_mutex_unlock(&p_data->t_meal_check_mutex);
-
     if (time_since_last_meal > p_data->t_time_to_die)
     {
         pthread_mutex_lock(&p_data->t_death_mutex);
@@ -81,7 +80,7 @@ void *ft_monitor_routine(void *arg)
             break;
         }
         pthread_mutex_unlock(&p_data->t_death_mutex);
-        ft_usleep_ms(100);
+        usleep(100);
     }
     return (NULL);
 }

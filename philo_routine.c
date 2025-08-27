@@ -6,7 +6,7 @@
 /*   By: yihakan <yihakan@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 00:42:50 by yihakan           #+#    #+#             */
-/*   Updated: 2025/08/28 01:11:59 by yihakan          ###   ########.fr       */
+/*   Updated: 2025/08/28 01:26:33 by yihakan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,10 @@ void ft_eat(t_philosopher *p_philo)
     t_program_data  *p_data;
 
     p_data = p_philo->t_program_data;
-    
-    // Special case: single philosopher can't eat (only one fork available)
     if (p_data->t_num_philosophers == 1)
     {
         pthread_mutex_lock(p_philo->t_left_fork);
         ft_print_status(p_philo, "has taken a fork", YELLOW);
-        // Single philosopher waits forever for the second fork
-        // Monitor will detect death while they're waiting
         while (1)
         {
             pthread_mutex_lock(&p_data->t_death_mutex);
@@ -39,8 +35,6 @@ void ft_eat(t_philosopher *p_philo)
         pthread_mutex_unlock(p_philo->t_left_fork);
         return;
     }
-
-    // Always acquire forks in order of memory address to prevent deadlock
     pthread_mutex_t *first_fork, *second_fork;
     if (p_philo->t_left_fork < p_philo->t_right_fork)
     {
@@ -52,20 +46,16 @@ void ft_eat(t_philosopher *p_philo)
         first_fork = p_philo->t_right_fork;
         second_fork = p_philo->t_left_fork;
     }
-    
     pthread_mutex_lock(first_fork);
     ft_print_status(p_philo, "has taken a fork", YELLOW);
     pthread_mutex_lock(second_fork);
     ft_print_status(p_philo, "has taken a fork", YELLOW);
-
     pthread_mutex_lock(&p_data->t_meal_check_mutex);
     p_philo->t_last_meal_time = ft_get_time_ms();
     ft_print_status(p_philo, "is eating", GREEN);
     p_philo->t_meals_eaten++;
     pthread_mutex_unlock(&p_data->t_meal_check_mutex);
-
     ft_usleep_ms(p_data->t_time_to_eat);
-
     pthread_mutex_unlock(second_fork);
     pthread_mutex_unlock(first_fork);
 }
@@ -108,5 +98,3 @@ void *ft_philo_routine(void *arg)
     }
     return (NULL);
 }
-
-
