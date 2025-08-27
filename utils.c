@@ -36,11 +36,13 @@ void ft_print_status(t_philosopher *p_philo, const char *status, const char *col
 
     p_data = p_philo->t_program_data;
     pthread_mutex_lock(&p_data->t_write_mutex);
+    pthread_mutex_lock(&p_data->t_death_mutex);
     if (p_data->t_simulation_running)
     {
         timestamp = ft_get_time_ms() - p_data->t_start_time;
         printf("%s%ld %d %s\n" RESET, color, timestamp, p_philo->t_id, status);
     }
+    pthread_mutex_unlock(&p_data->t_death_mutex);
     pthread_mutex_unlock(&p_data->t_write_mutex);
 }
 
